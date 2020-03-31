@@ -1,0 +1,91 @@
+PUT /nptel_index_final
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "my_custom_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "max_token_length": 20,
+          "char_filter": [
+            "html_strip"
+          ],
+          "filter": [
+            "lowercase",
+            "asciifolding"
+          ]
+        }
+      }
+    }
+  },
+  "mappings":{
+    "properties":{
+      "link":{
+     "enabled": false
+   },
+      "COURSE LAYOUT":{
+        "enabled": false
+      },
+      "Course Status :":{
+        "enabled": false
+      },
+      "Course Type :":{
+        "type": "keyword",
+        "norms": false
+      },
+      "Duration":{
+        "type": "keyword",
+        "norms": false
+      },
+      "Start Date :":{
+        "type": "keyword"
+      },
+      "End Date":{
+        "type": "keyword"
+      },
+      "Categaory":{
+        "type": "keyword",
+        "null_value": "NULL",
+        "fields": {
+          "english":{
+            "type":"text",
+            "analyzer":"english"
+          }
+        }
+      },
+      "Level :":{
+        "type": "keyword",
+        "norms": false
+      },
+      "title":{
+        "type": "text",
+        "analyzer": "standard", 
+        "search_analyzer": "my_custom_analyzer"
+      },
+      "University":{
+        "type": "keyword",
+        "null_value": "NULL",
+        "norms": false,
+        "fields": {
+          "english":{
+            "type":"text",
+            "analyzer":"english",
+            "search_analyzer": "my_custom_analyzer"
+          }
+        }
+      },
+      "Professor":{
+        "type": "text",
+        "norms": false,
+        "analyzer": "standard", 
+        "search_analyzer": "my_custom_analyzer"
+      },
+      "description":{
+        "type": "text",
+        "norms": false,
+        "analyzer": "standard", 
+        "search_analyzer": "my_custom_analyzer"
+      }
+    }
+  }
+}
