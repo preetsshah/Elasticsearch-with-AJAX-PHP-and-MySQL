@@ -1,26 +1,9 @@
 <?php
-//fetch2.php
 session_start();
-// include 'css_nptel.css';
 require_once '../vendor/autoload.php';
 use Elasticsearch\ClientBuilder;
 $client = ClientBuilder::create()->setHosts(['127.0.0.1:9200'])->build();
 
-/*For pagination
-
-$record_per_page = 10;
-$page='';
-if(isset($_POST["page"]))  
-{  
-    $page = $_POST["page"];  
-}  
-else  
-{  
-    $page = 1;  
-}  
-$start_from = ($page - 1)*$record_per_page;  
-
-*/
 $output = '';
 if(isset($_POST["query"]))
 {
@@ -86,25 +69,6 @@ if(isset($_POST["query"]))
 ]
 ];
 
-/*
-$params2=[
-    'body' => [      
-      'query' => [
-        'bool' => [
-          'must' => [
-            'multi_match' => [
-              'fields' => ['title','University','Professor','description'],
-              'query' => $search
-            ]
-          ]
-        ]
-      ],
-
-      'from' => $start_from,
-      'size' => $record_per_page
-    ]
-  ]; */
-
  $query = $client->search($params);
 
  $n = count($query['hits']['hits']);
@@ -151,14 +115,7 @@ if(isset($results))
   }
   
  }
-/*
- $total_pages = ceil($n/$record_per_page);  
- for($i=1; $i<=$total_pages; $i++)  
- {  
-      $output .= '<span class="pagination_link" style="cursor:pointer; padding:6px; border:1px solid #ccc;" id="'.$i.'">'.$i.'</span>';  
- }  
-$output .= '</div><br /><br />'; 
-*/
+
  echo $output;
 }
 else
