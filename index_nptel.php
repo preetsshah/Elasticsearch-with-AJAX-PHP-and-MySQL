@@ -1,16 +1,15 @@
 <?php
 	session_start();
-	// require_once '../init.php';
-	$_SESSION['q']='';
 ?>
 
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>NPTEL Trials</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css_nptel.css">
  </head>
  <body>
   <div class="container">
@@ -19,8 +18,9 @@
    <div class="form-group">
     <div class="input-group">
      <span class="input-group-addon">Search</span>
-     <input type="text" name="search_text" id="search_text" placeholder="Search by Customer Details" class="form-control" />
+     <input type="text" name="search_text" id="search_text" placeholder="Search here..." class="form-control" />
      
+     <br>
     </div>
    </div>
    <br />
@@ -35,18 +35,20 @@ $(document).ready(function(){
 
  load_data();
 
- function load_data(query)
+ function load_data(query) 
  {
   $.ajax({
    url:"fetch_nptel.php",
    method:"POST",
    data:{query:query},
+   //type: JSON, 
    success:function(data)
    {
     $('#result').html(data);
    }
   });
  }
+
  $('#search_text').keyup(function(){
   var search = $(this).val();
   if(search != "")
