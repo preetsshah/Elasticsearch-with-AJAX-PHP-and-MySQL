@@ -59,31 +59,25 @@ PUT /nptel_index_final
       },
       "title":{
         "type": "text",
-        "analyzer": "standard", 
+        "analyzer": "standard",
         "search_analyzer": "my_custom_analyzer"
       },
       "University":{
-        "type": "keyword",
-        "null_value": "NULL",
+        "type": "text",
         "norms": false,
-        "fields": {
-          "english":{
-            "type":"text",
-            "analyzer":"english",
-            "search_analyzer": "my_custom_analyzer"
-          }
-        }
+        "analyzer": "standard",
+        "search_analyzer": "my_custom_analyzer"
       },
       "Professor":{
         "type": "text",
         "norms": false,
-        "analyzer": "standard", 
+        "analyzer": "standard",
         "search_analyzer": "my_custom_analyzer"
       },
       "description":{
         "type": "text",
         "norms": false,
-        "analyzer": "standard", 
+        "analyzer": "standard",
         "search_analyzer": "my_custom_analyzer"
       }
     }
