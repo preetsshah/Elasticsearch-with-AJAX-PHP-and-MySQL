@@ -8,27 +8,8 @@ $output = '';
 if(isset($_POST["query"]))
 {
  $link='';
- // $description='';
  $search = $_POST["query"];
  $params=[
-    /*
-    'body' => [      
-      'query' => [
-        'bool' => [
-          'must' => [
-            'multi_match' => [
-              'fields' => ['title','University','Professor'],
-              'query' => $search
-            ]
-          ]
-        ]
-      ],
-      'from' => 0,
-      'size' => 350
-    ]
-  ];
-
-  */
   'body'=>[
   'query' => [
     'bool'=> [
@@ -53,28 +34,17 @@ if(isset($_POST["query"]))
           ]
         ]
       ]
-    ]
-  
+    ]  
 ],
   'from'=>0,
   'size'=>350
-  // 'highlight'=> [
-  //   'type'=>'unified',
-  //   'fields'=> [
-  //     '*'=>[
-        
-  //     ]
-  //   ]
-  // ]
 ]
 ];
 
  $query = $client->search($params);
 
  $n = count($query['hits']['hits']);
- // $n = 'track_total_hits';
 
- // $query = $client->search($params2);
  $query = $client->search($params);
 
   if($query['hits']['total']>=1){
